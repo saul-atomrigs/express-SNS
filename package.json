@@ -1,0 +1,24 @@
+{
+  "name": "express-sns",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saul-atomrigs/express-SNS.git"
+  },
+  "author": "Sol Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saul-atomrigs/express-SNS/issues"
+  },
+  "homepage": "https://github.com/saul-atomrigs/express-SNS#readme",
+  "dependencies": {
+    "mysql2": "^3.1.2",
+    "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.6.0"
+  }
+}
