@@ -51,15 +51,17 @@ router.get("/logout", isLoggedIn, (req, res) => {
   res.redirect("/");
 });
 
+// GET /auth/kakao로 접근하면 카카오 로그인 과정이 시작된다:
 router.get("/kakao", passport.authenticate("kakao"));
 
+// GET /auth/kakao/callback으로 로그인 후 성공 여부 결과를 받는다:
 router.get(
   "/kakao/callback",
   passport.authenticate("kakao", {
     failureRedirect: "/",
   }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect("/"); // 성공 시 /로 이동
   }
 );
 
