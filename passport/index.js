@@ -9,9 +9,23 @@ module.exports = () => {
     done(null, user.id);
   });
 
-/ // 세션에 저장한 아이디를 통해 사용자 정보 객체를 불러옴:
+  // 세션에 저장한 아이디를 통해 사용자 정보 객체를 불러옴:
   passport.deserializeUser((id, done) => {
-    User.findOne({ where: { id } })
+    User.findOne({
+      where: { id },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "nick"], // 실수로 비밀번호를 조회하는 것을 방지함 (브라우저에 비밀번호를 전송해서는 안됨)
+          as: "Followers",
+        },
+        {
+          model: User,
+          attributes: ["id", "nick"], // 실수로 비밀번호를 조회하는 것을 방지함 (브라우저에 비밀번호를 전송해서는 안됨)
+          as: "Followings",
+        },
+      ],
+    })
       .then((user) => done(null, user))
       .catch((err) => done(err));
   });

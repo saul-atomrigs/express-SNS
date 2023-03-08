@@ -10,6 +10,8 @@ const passport = require("passport");
 dotenv.config();
 const pageRouter = require("./routes/page");
 const authRouter = require("./routes/auth");
+const postRouter = require("/routes/post");
+const userRouter = require("/routes/user");
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 
@@ -32,6 +34,7 @@ sequelize
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/img", express.static(path.join(__dirname, "uploads"))); // 업로드한 이미지를 제공할 라우터(/img)도 express.static 미들웨어로 upload 폴더와 연결한다.
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -52,6 +55,8 @@ app.use(passport.session());
 
 app.use("/", pageRouter);
 app.use("/auth", authRouter); // 추가한 auth 라우터를 app.js에 연결한다.
+app.use("/post", postRouter); // 추가한 post 라우터를 app.js에 연결한다.
+app.use("/user", userRouter); // 추가한 user 라우터를 app.js에 연결한다.
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
